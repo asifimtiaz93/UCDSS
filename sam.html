@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Soldier Service Age</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .slider-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .slider {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .soldier-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .soldier-list li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .soldier-list li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Soldier Service Age</h1>
+
+    <div class="slider-container">
+        <input type="range" min="0" max="30" value="0" class="slider" id="ageSlider">
+        <p>Service Age: <span id="ageValue">0</span> years</p>
+    </div>
+
+    <ul class="soldier-list" id="soldierList">
+        <li>John Doe</li>
+        <li>Jane Smith</li>
+        <li>Mike Johnson</li>
+        <!-- Add more soldier names dynamically based on the service age filter -->
+    </ul>
+
+    <script>
+        var ageSlider = document.getElementById("ageSlider");
+        var ageValue = document.getElementById("ageValue");
+        var soldierList = document.getElementById("soldierList");
+        var soldiers = ["John Doe", "Jane Smith", "Mike Johnson", "Sarah Thompson"];
+
+        ageSlider.addEventListener("input", function() {
+            ageValue.textContent = ageSlider.value;
+            filterSoldiersByAge(ageSlider.value);
+        });
+
+        function filterSoldiersByAge(age) {
+            var filteredSoldiers = soldiers.filter(function(soldier) {
+                // Perform your logic to filter soldiers based on service age
+                // For example, you can compare the soldier's age with the provided age value
+                // and return true if it meets the criteria, or false otherwise
+                return calculateServiceAge(soldier) >= age;
+            });
+
+            displayFilteredSoldiers(filteredSoldiers);
+        }
+
+        function calculateServiceAge(soldier) {
+            // Implement your logic to calculate the service age of a soldier
+            // based on their start date or any other relevant information
+            // and return the service age in years
+            // For this example, let's assume the service age is a random value between 0 and 30
+            return Math.floor(Math.random() * 31);
+        }
+
+        function displayFilteredSoldiers(filteredSoldiers) {
+            soldierList.innerHTML = "";
+            filteredSoldiers.forEach(function(soldier) {
+                var li = document.createElement("li");
+                li.textContent = soldier;
+                soldierList.appendChild(li);
+            });
+        }
+
+        // Initially, display all soldiers
+        displayFilteredSoldiers(soldiers);
+    </script>
+</body>
+</html>
